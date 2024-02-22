@@ -1,7 +1,7 @@
 import { Container, Graphics, Assets } from 'pixi.js';
 import { IScene, Manager } from '../Manager';
 import { GameScene } from './GameScene';
-import { manifest } from '../manifest';
+import { assetManifest } from '../asset_manifest';
 
 export class LoaderScene extends Container implements IScene {
 	// for making our loader graphics...
@@ -37,9 +37,9 @@ export class LoaderScene extends Container implements IScene {
 	resize(screenWidth: number, screenHeight: number): void {}
 
 	private async initializeLoader(): Promise<void> {
-		await Assets.init({ manifest: manifest });
+		await Assets.init({ manifest: assetManifest });
 
-		const bundleIds = manifest.bundles.map((bundle) => bundle.name);
+		const bundleIds = assetManifest.bundles.map((bundle) => bundle.name);
 
 		await Assets.loadBundle(bundleIds, this.downloadProgress.bind(this));
 	}
