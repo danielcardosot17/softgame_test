@@ -3,9 +3,10 @@ import type { AssetsManifest } from 'pixi.js';
 export const assetManifest: AssetsManifest = {
 	bundles: [
 		{
-			name: 'bundleName',
+			name: 'cardScene',
 			assets: {
-				'Clampy the clamp': './clampy.png',
+				'Card Back': '.cards/card_back.png',
+				'Card Clubs A': '.cards/card_clubs_A.png',
 			},
 		},
 	],
