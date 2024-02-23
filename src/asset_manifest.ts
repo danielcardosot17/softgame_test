@@ -23,6 +23,7 @@ export const assetManifest: AssetsManifest = {
 			name: 'fireScene',
 			assets: {
 				'fire sparks': './fire_particle/firespark.json',
+				'poof-sprite': './poof_sprite.png',
 			},
 		},
 	],
