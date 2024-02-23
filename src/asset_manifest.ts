@@ -26,5 +26,11 @@ export const assetManifest: AssetsManifest = {
 				'poof-sprite': './poof_sprite.png',
 			},
 		},
+		{
+			name: 'textScene',
+			assets: {
+				emoticons: './emoticons/emoticons.json',
+			},
+		},
 	],
 };

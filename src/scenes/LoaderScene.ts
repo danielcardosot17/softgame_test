@@ -43,7 +43,10 @@ export class LoaderScene extends Container implements IScene {
 
 		const bundleIds = assetManifest.bundles.map((bundle) => bundle.name);
 
-		await Assets.loadBundle(bundleIds, this.downloadProgress.bind(this));
+		const loadedBundles = await Assets.loadBundle(
+			bundleIds,
+			this.downloadProgress.bind(this)
+		);
 	}
 
 	private downloadProgress(progressRatio: number): void {
