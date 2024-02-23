@@ -1,6 +1,5 @@
 import { Container, Graphics, Assets } from 'pixi.js';
 import { IScene, Manager } from '../Manager';
-import { GameScene } from './GameScene';
 import { assetManifest } from '../asset_manifest';
 import { MenuScene } from './MenuScene';
 
