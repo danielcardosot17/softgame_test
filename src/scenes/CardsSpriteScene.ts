@@ -2,17 +2,17 @@ import { Container, Ticker } from 'pixi.js';
 import { IScene, Manager } from '../Manager';
 import { LargeButton } from '../ui/LargeButton';
 import { GameScene } from './GameScene';
-import { CardStack } from '../ui/CardStack';
+import { CardParticleStack } from '../ui/CardParticleStack';
 import { MenuScene } from './MenuScene';
 import { CardMoverComponent } from '../ui/CardMoverComponent';
+import { CardSpriteStack } from '../ui/CardSpriteStack';
 
-export class CardsScene extends Container implements IScene {
+export class CardsSpriteScene extends Container implements IScene {
 	private menuSceneButton: LargeButton;
-
 	private numCards: number = 144;
 
-	private leftCardStack: CardStack;
-	private rightCardStack: CardStack;
+	private leftCardStack: CardSpriteStack;
+	private rightCardStack: CardSpriteStack;
 
 	private currentCardIndex: number;
 	private timer: number = 0;
@@ -25,7 +25,7 @@ export class CardsScene extends Container implements IScene {
 			Manager.changeScene(new MenuScene())
 		);
 
-		this.leftCardStack = new CardStack(
+		this.leftCardStack = new CardSpriteStack(
 			this.numCards,
 			this.numCards,
 			'Card Clubs A'
@@ -33,7 +33,7 @@ export class CardsScene extends Container implements IScene {
 
 		this.currentCardIndex = this.numCards - 1;
 
-		this.rightCardStack = new CardStack(this.numCards, 0, 'Card Clubs A');
+		this.rightCardStack = new CardSpriteStack(this.numCards, 0, 'Card Clubs A');
 
 		this.addChild(this.menuSceneButton);
 		this.addChild(this.rightCardStack);

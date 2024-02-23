@@ -1,20 +1,9 @@
-import { ParticleContainer, Sprite } from 'pixi.js';
-import { CardMoverComponent } from './CardMoverComponent';
+import { Container, Sprite } from 'pixi.js';
 
-export class CardStack extends ParticleContainer {
+export class CardSpriteStack extends Container {
 	private cards: number = 0;
-	constructor(
-		cardMaxAmount: number,
-		cardInitialAmount: number,
-		cardSpriteName: string
-	) {
-		super(cardMaxAmount, {
-			scale: true,
-			position: true,
-			rotation: true,
-			uvs: true,
-			alpha: true,
-		});
+	constructor(cardInitialAmount: number) {
+		super();
 
 		for (let i = 0; i < cardInitialAmount; i++) {
 			this.addCard(cardSpriteName);
