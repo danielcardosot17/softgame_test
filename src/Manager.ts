@@ -1,6 +1,9 @@
 import { Application, DisplayObject } from 'pixi.js';
+import { FpsDisplay } from './ui/FpsDisplay';
 
 export class Manager {
+	private static fpsDisplay: FpsDisplay;
+
 	private constructor() {
 		/*this class is purely static. No constructor to see here*/
 	}
@@ -41,10 +44,17 @@ export class Manager {
 			height: height,
 		});
 
+		Manager.fpsDisplay = new FpsDisplay();
+		Manager.fpsDisplay.x = width * 0.05;
+		Manager.fpsDisplay.y = height * 0.05;
+
+		Manager.app.stage.addChild(Manager.fpsDisplay);
+
 		// Add the ticker
 		Manager.app.ticker.add(Manager.update);
 		// listen for the browser telling us that the screen size changed
 		window.addEventListener('resize', Manager.resize);
+		this.resize();
 	}
 
 	public static resize(): void {
@@ -53,6 +63,7 @@ export class Manager {
 			Manager.currentScene.resize(Manager.width, Manager.height);
 		}
 	}
+
 	// Call this function when you want to go to a new scene
 	public static changeScene(newScene: IScene): void {
 		// Remove and destroy old scene... if we had one..
@@ -75,6 +86,7 @@ export class Manager {
 			Manager.currentScene.update(framesPassed);
 		}
 
+		Manager.fpsDisplay.updateFps(Manager.app.ticker.FPS);
 		// as I said before, I HATE the "frame passed" approach. I would rather use `Manager.app.ticker.deltaMS`
 	}
 }

@@ -1,9 +1,10 @@
-import { Container, Sprite } from 'pixi.js';
+import { Container, Text } from 'pixi.js';
 import { IScene, Manager } from '../Manager';
 import { LargeButton } from '../ui/LargeButton';
 import { CardsScene } from './CardsScene';
 import { TextScene } from './TextScene';
 import { FireScene } from './FireScene';
+import { FpsDisplay } from '../ui/FpsDisplay';
 
 export class MenuScene extends Container implements IScene {
 	/** Button that leads to gameplay */
@@ -34,7 +35,13 @@ export class MenuScene extends Container implements IScene {
 
 	resize(screenWidth: number, screenHeight: number): void {
 		this.cardsSceneButton.x = screenWidth * 0.5;
-		this.cardsSceneButton.y = screenHeight - 30;
+		this.cardsSceneButton.y = screenHeight * 0.25;
+
+		this.textSceneButton.x = screenWidth * 0.5;
+		this.textSceneButton.y = screenHeight * 0.5;
+
+		this.fireSceneButton.x = screenWidth * 0.5;
+		this.fireSceneButton.y = screenHeight * 0.75;
 	}
 
 	update(framesPassed: number): void {}
