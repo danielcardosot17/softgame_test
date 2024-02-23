@@ -48,7 +48,6 @@ export class CustomTextDisplay extends Container {
 	}
 
 	public updateText(text: string, emoteName: string): void {
-		// var finalText = this.parseStringAndChangeEmote(text);
 		var texture = this.emotesStringTextureMap.get(emoteName);
 		if (texture) this.imageSprite.texture = texture;
 		this.imageSprite.scale.set(this.randomIntFromInterval(0.2, 2));
@@ -60,13 +59,4 @@ export class CustomTextDisplay extends Container {
 		// min and max included
 		return Math.floor(Math.random() * (max - min + 1) + min);
 	}
-
-	// parseStringAndChangeEmote(text: string): string {
-	// 	//should be regex
-	// 	var firstIndex = text.indexOf(':');
-	// 	var lastIndex = text.indexOf('::');
-	// 	var emoteName = text.substring(firstIndex + 1, lastIndex);
-	// 	console.log(emoteName);
-	// 	return emoteName;
-	// }
 }

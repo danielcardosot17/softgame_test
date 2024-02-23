@@ -35,7 +35,6 @@ export class TextScene extends Container implements IScene {
 		this.reservedEmotesTextures = Assets.cache.get('emoticons').textures;
 
 		for (const emoteName in this.reservedEmotesTextures) {
-			// var finalString = ':' + emoteName.replace('.png', '') + '::';
 			this.predefinedEmoteStrings.push(emoteName);
 			this.emotesStringTextureMap.set(
 				emoteName,
@@ -80,11 +79,6 @@ export class TextScene extends Container implements IScene {
 		var randomIndexForText = Math.floor(
 			Math.random() * this.predefinedTexts.length
 		);
-		// var randomEmoteIndex = Math.floor(
-		// 	Math.random() * this.predefinedEmoteStrings.length
-		// );
-		// var emoteString = this.predefinedEmoteStrings[randomEmoteIndex];
-		// return this.predefinedTexts[randomIndexForText] + ' ' + emoteString;
 		return this.predefinedTexts[randomIndexForText];
 	}
 }
