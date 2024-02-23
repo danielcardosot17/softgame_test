@@ -69,19 +69,8 @@ export class CardsScene extends Container implements IScene {
 			this.currentCardIndex
 		);
 
-		var { x, y } = this.rightCardStack.getLastCardGlobalPosition();
-
-		var finalX = x - this.leftCardStack.getGlobalPosition().x;
-		var finalY = y - this.leftCardStack.getGlobalPosition().y;
-
 		this.movers.push(
-			new CardMoverComponent(
-				lastCardSprite,
-				lastCardSprite.x,
-				lastCardSprite.y,
-				finalX,
-				finalY
-			)
+			new CardMoverComponent(lastCardSprite, lastCardSprite.x, lastCardSprite.y)
 		);
 
 		this.currentCardIndex--;
@@ -89,7 +78,13 @@ export class CardsScene extends Container implements IScene {
 
 	updateMovers(deltaTime: number) {
 		for (let i = this.movers.length - 1; i >= 0; i--) {
-			this.movers[i].updatePosition(deltaTime);
+			this.movers[i].updatePosition(
+				deltaTime,
+				this.rightCardStack.getLastCardGlobalPosition().x -
+					this.leftCardStack.getGlobalPosition().x,
+				this.rightCardStack.getLastCardGlobalPosition().y -
+					this.leftCardStack.getGlobalPosition().y
+			);
 			if (this.movers[i].hasArrived) {
 				// remove sprite from container
 				this.leftCardStack.removeCard(this.movers[i].cardSprite);
