@@ -19,5 +19,11 @@ export const assetManifest: AssetsManifest = {
 				'Card Clubs A': './cards/card_clubs_A.png',
 			},
 		},
+		{
+			name: 'fireScene',
+			assets: {
+				'fire sparks': './fire_particle/firespark.json',
+			},
+		},
 	],
 };
