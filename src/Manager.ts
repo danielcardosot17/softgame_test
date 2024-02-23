@@ -64,6 +64,7 @@ export class Manager {
 		// Add the new one
 		Manager.currentScene = newScene;
 		Manager.app.stage.addChild(Manager.currentScene);
+		this.resize();
 	}
 
 	// This update will be called by a pixi ticker and tell the scene that a tick happened

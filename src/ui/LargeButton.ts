@@ -74,11 +74,11 @@ export class LargeButton extends FancyButton {
 	}
 
 	private handleHover() {
-		sfx.play('common/sfx-hover.wav');
+		sfx.play('sfx-hover');
 	}
 
 	private handleDown() {
-		sfx.play('common/sfx-press.wav');
+		sfx.play('sfx-press');
 		this.label.y = -5;
 	}
 
