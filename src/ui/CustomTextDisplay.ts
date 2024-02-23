@@ -24,8 +24,6 @@ export class CustomTextDisplay extends Container {
 			fontFamily: 'Comic Sans MS',
 			fontSize: 24,
 		});
-		console.log('bitmapFont');
-		console.log(bitmapFont.chars);
 
 		this.pixiText = new BitmapText('Random Text', {
 			fontName: 'comic 32',

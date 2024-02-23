@@ -1,7 +1,6 @@
 import { Assets, Container, Sprite, Texture } from 'pixi.js';
 import { IScene, Manager } from '../Manager';
 import { LargeButton } from '../ui/LargeButton';
-import { GameScene } from './GameScene';
 import { MenuScene } from './MenuScene';
 import { CustomTextDisplay } from '../ui/CustomTextDisplay';
 
