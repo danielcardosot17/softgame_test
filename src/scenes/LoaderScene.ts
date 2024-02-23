@@ -2,6 +2,7 @@ import { Container, Graphics, Assets } from 'pixi.js';
 import { IScene, Manager } from '../Manager';
 import { GameScene } from './GameScene';
 import { assetManifest } from '../asset_manifest';
+import { MenuScene } from './MenuScene';
 
 export class LoaderScene extends Container implements IScene {
 	// for making our loader graphics...
@@ -31,9 +32,10 @@ export class LoaderScene extends Container implements IScene {
 		this.addChild(this.loaderBar);
 
 		this.initializeLoader().then(() => {
-			this.gameLoaded();
+			this.goToMenuScene();
 		});
 	}
+
 	resize(screenWidth: number, screenHeight: number): void {}
 
 	private async initializeLoader(): Promise<void> {
@@ -48,9 +50,8 @@ export class LoaderScene extends Container implements IScene {
 		this.loaderBarFill.scale.x = progressRatio;
 	}
 
-	private gameLoaded(): void {
-		// Change scene to the game scene!
-		Manager.changeScene(new GameScene());
+	private goToMenuScene(): void {
+		Manager.changeScene(new MenuScene());
 	}
 
 	public update(framesPassed: number): void {

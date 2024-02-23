@@ -3,7 +3,7 @@ import { IScene, Manager } from '../Manager';
 import { LargeButton } from '../ui/LargeButton';
 import { GameScene } from './GameScene';
 
-export class CardsScene extends Container implements IScene {
+export class FireScene extends Container implements IScene {
 	constructor() {
 		super();
 	}

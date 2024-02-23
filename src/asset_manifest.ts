@@ -5,8 +5,8 @@ export const assetManifest: AssetsManifest = {
 		{
 			name: 'cardScene',
 			assets: {
-				'Card Back': '.cards/card_back.png',
-				'Card Clubs A': '.cards/card_clubs_A.png',
+				'Card Back': './cards/card_back.png',
+				'Card Clubs A': './cards/card_clubs_A.png',
 			},
 		},
 	],

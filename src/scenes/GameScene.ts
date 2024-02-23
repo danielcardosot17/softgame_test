@@ -8,7 +8,7 @@ export class GameScene extends Container implements IScene {
 		super();
 
 		// Inside assets.ts we have a line that says `"Clampy from assets.ts!": "./clampy.png",`
-		this.clampy = Sprite.from('Clampy the clamp');
+		this.clampy = Sprite.from('Card Clubs A');
 
 		this.clampy.anchor.set(0.5);
 		this.clampy.x = Manager.width / 2;

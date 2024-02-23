@@ -8,10 +8,20 @@
 	},
 	"dependencies": {
 		"@pixi/sound": "^5.2.3",
+		"gsap": "^3.12.2",
 		"@pixi/ui": "^0.10.5",
 		"pixi.js": "^7.2.4"
 	},
 	"devDependencies": {
+		"@assetpack/cli": "^0.7.0",
+		"@assetpack/core": "^0.8.0",
+		"@assetpack/plugin-compress": "^0.7.0",
+		"@assetpack/plugin-ffmpeg": "^0.7.0",
+		"@assetpack/plugin-json": "^0.7.0",
+		"@assetpack/plugin-manifest": "^0.7.0",
+		"@assetpack/plugin-mipmap": "^0.7.0",
+		"@assetpack/plugin-texture-packer": "^0.7.0",
+		"@assetpack/plugin-webfont": "^0.7.0",
 		"@types/pixi.js": "^5.0.0",
 		"copy-webpack-plugin": "^11.0.0",
 		"html-webpack-plugin": "^5.5.3",
