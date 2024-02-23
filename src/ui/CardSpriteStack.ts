@@ -1,45 +1,61 @@
 import { Container, Sprite } from 'pixi.js';
+import { Card } from './Card';
+import { assetManifest } from '../asset_manifest';
 
 export class CardSpriteStack extends Container {
-	private cards: number = 0;
+	cards: Card[] = [];
 	constructor(cardInitialAmount: number) {
 		super();
 
+		var cardNames: string[] = this.getCardNames();
+
 		for (let i = 0; i < cardInitialAmount; i++) {
-			this.addCard(cardSpriteName);
+			this.addCard(this.getRandomName(cardNames));
 		}
 	}
 
-	public addCard(cardSpriteName: string) {
-		const cardSprite = Sprite.from(cardSpriteName);
-		cardSprite.anchor.set(0.5);
-		cardSprite.x = this.cards * 1;
-		cardSprite.y = this.cards * 0.5;
-		cardSprite.zIndex = this.cards;
-		this.addChild(cardSprite);
-		this.cards++;
+	getRandomName(cardNames: string[]): string {
+		var randomIndex = Math.floor(Math.random() * cardNames.length);
+		return cardNames[randomIndex];
 	}
 
-	public removeCard(cardSprite: Sprite) {
-		this.removeChild(cardSprite);
-		this.cards--;
+	getCardNames(): string[] {
+		return Object.keys(assetManifest.bundles[1].assets);
+	}
+
+	public addCard(cardSpriteName: string) {
+		var card = new Card(cardSpriteName);
+		card.sprite.anchor.set(0.5);
+		card.sprite.x = this.cards.length * 1;
+		card.sprite.y = this.cards.length * 0.5;
+		card.sprite.zIndex = this.cards.length;
+		this.addChild(card.sprite);
+		this.cards.push(card);
+	}
+
+	public removeCard(card: Card) {
+		const index = this.cards.indexOf(card);
+		if (index > -1) {
+			this.cards.splice(index, 1);
+		}
+		this.removeChild(card.sprite);
 	}
 
 	public getLastCardGlobalPosition(): { x: number; y: number } {
-		if (this.cards == 0) {
+		if (this.cards.length == 0) {
 			return {
 				x: this.getGlobalPosition().x,
 				y: this.getGlobalPosition().y,
 			};
 		} else {
 			return {
-				x: this.getChildAt(this.cards - 1).getGlobalPosition().x,
-				y: this.getChildAt(this.cards - 1).getGlobalPosition().y,
+				x: this.getChildAt(this.cards.length - 1).getGlobalPosition().x,
+				y: this.getChildAt(this.cards.length - 1).getGlobalPosition().y,
 			};
 		}
 	}
 
-	public getCardSpriteAt(index: number) {
-		return this.getChildAt(index);
+	public getCardAt(index: number) {
+		return this.cards[index];
 	}
 }

@@ -1,8 +1,8 @@
 import { Sprite } from 'pixi.js';
 
 export class Card {
-	private name: string;
-	private sprite: Sprite;
+	name: string;
+	sprite: Sprite;
 
 	constructor(name: string) {
 		this.name = name;

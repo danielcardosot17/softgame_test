@@ -6,6 +6,8 @@ import { CardParticleStack } from '../ui/CardParticleStack';
 import { MenuScene } from './MenuScene';
 import { CardMoverComponent } from '../ui/CardMoverComponent';
 import { CardSpriteStack } from '../ui/CardSpriteStack';
+import { Card } from '../ui/Card';
+import { CardMoverSpriteComponent } from '../ui/CardMoverSpriteComponent';
 
 export class CardsSpriteScene extends Container implements IScene {
 	private menuSceneButton: LargeButton;
@@ -16,7 +18,7 @@ export class CardsSpriteScene extends Container implements IScene {
 
 	private currentCardIndex: number;
 	private timer: number = 0;
-	private movers: CardMoverComponent[] = [];
+	private movers: CardMoverSpriteComponent[] = [];
 
 	constructor() {
 		super();
@@ -25,15 +27,11 @@ export class CardsSpriteScene extends Container implements IScene {
 			Manager.changeScene(new MenuScene())
 		);
 
-		this.leftCardStack = new CardSpriteStack(
-			this.numCards,
-			this.numCards,
-			'Card Clubs A'
-		);
+		this.leftCardStack = new CardSpriteStack(this.numCards);
 
 		this.currentCardIndex = this.numCards - 1;
 
-		this.rightCardStack = new CardSpriteStack(this.numCards, 0, 'Card Clubs A');
+		this.rightCardStack = new CardSpriteStack(0);
 
 		this.addChild(this.menuSceneButton);
 		this.addChild(this.rightCardStack);
@@ -65,12 +63,14 @@ export class CardsSpriteScene extends Container implements IScene {
 	}
 
 	addNewCardToMovers() {
-		var lastCardSprite = this.leftCardStack.getCardSpriteAt(
-			this.currentCardIndex
-		);
+		var lastCard: Card = this.leftCardStack.getCardAt(this.currentCardIndex);
 
 		this.movers.push(
-			new CardMoverComponent(lastCardSprite, lastCardSprite.x, lastCardSprite.y)
+			new CardMoverSpriteComponent(
+				lastCard,
+				lastCard.sprite.x,
+				lastCard.sprite.y
+			)
 		);
 
 		this.currentCardIndex--;
@@ -87,9 +87,9 @@ export class CardsSpriteScene extends Container implements IScene {
 			);
 			if (this.movers[i].hasArrived) {
 				// remove sprite from container
-				this.leftCardStack.removeCard(this.movers[i].cardSprite);
+				this.leftCardStack.removeCard(this.movers[i].card);
+				this.rightCardStack.addCard(this.movers[i].card.name);
 				this.movers.splice(i, 1); // remove from movers
-				this.rightCardStack.addCard('Card Clubs A');
 			}
 		}
 	}
