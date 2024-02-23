@@ -1,9 +1,14 @@
 import { ParticleContainer, Sprite } from 'pixi.js';
+import { CardMoverComponent } from './CardMoverComponent';
 
 export class CardStack extends ParticleContainer {
-	private cards: number;
-	constructor(cardAmount: number, cardSpriteName: string) {
-		super(cardAmount, {
+	private cards: number = 0;
+	constructor(
+		cardMaxAmount: number,
+		cardInitialAmount: number,
+		cardSpriteName: string
+	) {
+		super(cardMaxAmount, {
 			scale: true,
 			position: true,
 			rotation: true,
@@ -11,15 +16,24 @@ export class CardStack extends ParticleContainer {
 			alpha: true,
 		});
 
-		for (let i = 0; i < cardAmount; i++) {
-			const cardSprite = Sprite.from(cardSpriteName);
-			cardSprite.anchor.set(0.5);
-			cardSprite.x = i * 1;
-			cardSprite.y = i * 0.5;
-			this.addChild(cardSprite);
+		for (let i = 0; i < cardInitialAmount; i++) {
+			this.addCard(cardSpriteName);
 		}
+	}
 
-		this.cards = cardAmount;
+	public addCard(cardSpriteName: string) {
+		const cardSprite = Sprite.from(cardSpriteName);
+		cardSprite.anchor.set(0.5);
+		cardSprite.x = this.cards * 1;
+		cardSprite.y = this.cards * 0.5;
+		cardSprite.zIndex = this.cards;
+		this.addChild(cardSprite);
+		this.cards++;
+	}
+
+	public removeCard(cardSprite: Sprite) {
+		this.removeChild(cardSprite);
+		this.cards--;
 	}
 
 	public getLastCardGlobalPosition(): { x: number; y: number } {

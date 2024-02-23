@@ -1,15 +1,15 @@
-import { Container, Sprite, Ticker } from 'pixi.js';
+import { Container, Ticker } from 'pixi.js';
 import { IScene, Manager } from '../Manager';
 import { LargeButton } from '../ui/LargeButton';
 import { GameScene } from './GameScene';
 import { CardStack } from '../ui/CardStack';
 import { MenuScene } from './MenuScene';
-import { lerp } from '../utils/lerp';
+import { CardMoverComponent } from '../ui/CardMoverComponent';
 
 export class CardsScene extends Container implements IScene {
 	private menuSceneButton: LargeButton;
 
-	private numCards: number = 10;
+	private numCards: number = 144;
 
 	private leftCardStack: CardStack;
 	private rightCardStack: CardStack;
@@ -25,15 +25,19 @@ export class CardsScene extends Container implements IScene {
 			Manager.changeScene(new MenuScene())
 		);
 
-		this.leftCardStack = new CardStack(this.numCards, 'Card Clubs A');
+		this.leftCardStack = new CardStack(
+			this.numCards,
+			this.numCards,
+			'Card Clubs A'
+		);
 
 		this.currentCardIndex = this.numCards - 1;
 
-		this.rightCardStack = new CardStack(1, 'Card Clubs A');
+		this.rightCardStack = new CardStack(this.numCards, 0, 'Card Clubs A');
 
 		this.addChild(this.menuSceneButton);
-		this.addChild(this.leftCardStack);
 		this.addChild(this.rightCardStack);
+		this.addChild(this.leftCardStack);
 	}
 
 	resize(screenWidth: number, screenHeight: number): void {
@@ -87,54 +91,11 @@ export class CardsScene extends Container implements IScene {
 		for (let i = this.movers.length - 1; i >= 0; i--) {
 			this.movers[i].updatePosition(deltaTime);
 			if (this.movers[i].hasArrived) {
+				// remove sprite from container
+				this.leftCardStack.removeCard(this.movers[i].cardSprite);
 				this.movers.splice(i, 1); // remove from movers
+				this.rightCardStack.addCard('Card Clubs A');
 			}
-		}
-	}
-}
-
-class CardMoverComponent {
-	private elapsedTime: number;
-	private cardSprite: Sprite;
-	private finalX: number;
-	private finalY: number;
-	private initialX: number;
-	private initialY: number;
-	private movementTime: number = 2;
-	public hasArrived: boolean = false;
-
-	constructor(
-		cardSprite: Sprite,
-		initialX: number,
-		initialY: number,
-		finalX: number,
-		finalY: number
-	) {
-		this.elapsedTime = 0;
-		this.cardSprite = cardSprite;
-		this.finalX = finalX;
-		this.finalY = finalY;
-		this.initialX = initialX;
-		this.initialY = initialY;
-	}
-
-	updatePosition(deltaTime: number) {
-		this.elapsedTime += deltaTime;
-		this.cardSprite.x = lerp(
-			this.initialX,
-			this.finalX,
-			this.movementTime,
-			this.elapsedTime
-		);
-		this.cardSprite.y = lerp(
-			this.initialY,
-			this.finalY,
-			this.movementTime,
-			this.elapsedTime
-		);
-
-		if (this.cardSprite.x == this.finalX && this.cardSprite.y == this.finalY) {
-			this.hasArrived = true;
 		}
 	}
 }
