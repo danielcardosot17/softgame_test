@@ -49,6 +49,15 @@ The second effect uses a [Particle Emitter](https://github.com/pixijs/particle-e
 I decided to use both to see the difference.
 I thought making another using a ParticleContainer, but decided it would e to similar to the Particle Emitter one.
 
+## Final
+
+The final code is full of duplication (CardMoverComponent vs CardMoverSpriteComponet / CardsParticleScene vs CardsSpriteScene) and disorganization.
+That is because I made it fast and was learning on the go. Given time, of course I'd clean it up.
+Please, give me any feedback.
+Any questions feel free to contact me!
+
+Thanks
+
 
 ### The game:  https://calangognalac.itch.io/softgames-junior-dev-test-pixijs?password=123123
 ### The github:  https://github.com/danielcardosot17/softgame_test
